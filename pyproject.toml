@@ -1,0 +1,214 @@
+# This project was generated with 0.3.22 using template: https://github.com/beeware/briefcase-template@v0.3.22
+[tool.briefcase]
+project_name = "niftyoptiondata"
+bundle = "badri.nifty.com"
+version = "0.0.1"
+url = "https://com.nifty.badri/niftyoptions"
+license.file = "LICENSE"
+author = "badri"
+author_email = "rayidibharath99@gmail.com"
+python_version = "3.8"  # Add this line at the top level
+
+[tool.briefcase.app.niftyoptions]
+formal_name = "niftydata"
+description = "niftyopd"
+long_description = """More details about the app should go here.
+"""
+sources = [
+    "src/niftyoptions",
+]
+test_sources = [
+    "tests",
+]
+
+requires = [
+]
+test_requires = [
+    "pytest",
+]
+
+[tool.briefcase.app.niftyoptions.macOS]
+universal_build = true
+requires = [
+    "toga-cocoa~=0.4.7",
+    "std-nslog~=1.0.3",
+]
+
+[tool.briefcase.app.niftyoptions.linux]
+requires = [
+    "toga-gtk~=0.4.7",
+]
+
+[tool.briefcase.app.niftyoptions.linux.system.debian]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "libcairo2-dev",
+    # Needed to compile PyGObject wheel
+    "libgirepository1.0-dev",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK and its GI bindings
+    "gir1.2-gtk-3.0",
+    "libgirepository-1.0-1",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3-module",
+    # Needed to provide WebKit2 at runtime
+    # Note: Debian 11 and Ubuntu 20.04 require gir1.2-webkit2-4.0 instead
+    # "gir1.2-webkit2-4.1",
+]
+
+[tool.briefcase.app.niftyoptions.linux.system.rhel]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-gobject-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+]
+
+system_runtime_requires = [
+    # Needed to support Python bindings to GTK
+    "gobject-introspection",
+    # Needed to provide GTK
+    "gtk3",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3",
+    # Needed to provide WebKit2 at runtime
+    # "webkit2gtk3",
+]
+
+[tool.briefcase.app.niftyoptions.linux.system.suse]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK
+    "gtk3",
+    # Needed to support Python bindings to GTK
+    "gobject-introspection", "typelib(Gtk) = 3.0",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra-gtk3-module",
+    # Needed to provide WebKit2 at runtime
+    # "libwebkit2gtk3", "typelib(WebKit2)",
+]
+
+[tool.briefcase.app.niftyoptions.linux.system.arch]
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection",
+    # Runtime dependencies that need to exist so that the
+    # Arch package passes final validation.
+    # Needed to provide GTK
+    "gtk3",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra",
+    # Needed to provide WebKit2
+    # "webkit2gtk",
+]
+
+system_runtime_requires = [
+    # Needed to provide GTK
+    "gtk3",
+    # Needed to provide PyGObject bindings
+    "gobject-introspection-runtime",
+    # Dependencies that GTK looks for at runtime
+    "libcanberra",
+    # Needed to provide WebKit2 at runtime
+    # "webkit2gtk",
+]
+
+[tool.briefcase.app.niftyoptions.linux.appimage]
+manylinux = "manylinux_2_28"
+
+system_requires = [
+    # Needed to compile pycairo wheel
+    "cairo-gobject-devel",
+    # Needed to compile PyGObject wheel
+    "gobject-introspection-devel",
+    # Needed to provide GTK
+    "gtk3-devel",
+    # Dependencies that GTK looks for at runtime, that need to be
+    # in the build environment to be picked up by linuxdeploy
+    "libcanberra-gtk3",
+    "PackageKit-gtk3-module",
+    "gvfs-client",
+]
+
+linuxdeploy_plugins = [
+    "DEPLOY_GTK_VERSION=3 gtk",
+]
+
+[tool.briefcase.app.niftyoptions.linux.flatpak]
+flatpak_runtime = "org.gnome.Platform"
+flatpak_runtime_version = "47"
+flatpak_sdk = "org.gnome.Sdk"
+
+[tool.briefcase.app.niftyoptions.windows]
+requires = [
+    "toga-winforms>=0.5.0",
+    "pandas>=2.2.0",         # Data processing
+    "numpy>=2.0.0",          # Math operations
+    "requests>=2.32.0",      # HTTP requests
+    "python-dateutil>=2.8.0", # Date handling
+    "pytz>=2025.0",          # Timezone support
+    "six>=1.16.0"            # Python 2/3 compatibility
+]
+
+# Mobile deployments
+[tool.briefcase.app.niftyoptions.iOS]
+requires = [
+    "toga-iOS~=0.4.7",
+    "std-nslog~=1.0.3",
+]
+
+[tool.briefcase.app.niftyoptions.android]
+python_version = "3.8"
+requires = [
+    "toga-android",
+    "pandas", 
+    "numpy",  
+    "python-dateutil==2.8.2",
+    "pytz",
+    "six",
+    "requests"
+]
+
+base_theme = "Theme.MaterialComponents.Light.DarkActionBar"
+
+build_gradle_dependencies = [
+    "com.google.android.material:material:1.12.0",
+    "androidx.appcompat:appcompat:1.6.1",
+    "androidx.constraintlayout:constraintlayout:2.1.4"
+]
+
+# Force Java 17 compatibility
+java_version = "17"
+target_sdk_version = 34  # Android 14
+min_sdk_version = 21    # Android 5.0
+
+# Web deployments
+[tool.briefcase.app.niftyoptions.web]
+requires = [  
+    "python-dateutil",
+    "pytz",
+    "six",
+    "toga-web>=0.3.0",  # Mandatory web backend
+    "pandas>=2.0.0",    # With version pins
+    "numpy>=1.24.0",
+    "requests>=2.28.0"
+]
+style_framework = "Shoelace v2.3"
+
+[tool.briefcase.app.niftyoptions.web.browser]
+requires = [
+    "pyodide==0.25.0",  # WASM Python runtime
+    "pyodide-http==0.2.1",  # Patches requests
+    "shoelace==2.3.0"     # For requests support
+]
+
